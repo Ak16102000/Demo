@@ -1,0 +1,32 @@
+version: 2
+sources:
+  - name: my_csv_source
+    loader: s3
+    bucket: akhildbt
+    path: "s3://akhildbt/home_insurance.csv"
+    file_format: csv
+    delimiter: ','
+
+version: 2
+models:
+  - name: HOME_INSURANCE
+    columns:
+      - name: QUOTE_DATE
+        type: varchar
+      - name: I
+        type: NUMBER
+      - name: POLICE
+        type: VARCHAR
+    pre-hook: |
+      create table if not exists {{ HOME_INSURANCE }} (
+        column_1 VARCHAR,
+        column_2 NUMBER,
+        column_3 VARCHAR,
+      )
+    materialized: table
+    schema: PUBLIC
+    description: "POLICIES OF A HOME INSURANCE COMPANY"
+    sources:
+      - name: s3://akhildbt/home_insurance.csv
+        tables: 
+          - name:  HOME_INSURANCE
