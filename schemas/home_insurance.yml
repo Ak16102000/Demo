@@ -1,0 +1,27 @@
+version: 1
+# Define the schema of the home insurance CSV file
+models:
+  - name: home_insurance
+    columns:
+      - name: QUOTE_DATE
+        tests:
+          - not_null
+          - type: date
+      - name: COVER_START
+        tests:
+          - not_null
+          - type: date
+      - name: CLAIM3YEARS
+        tests:
+          - not_null
+      - name: LAST_ANN_PREM_GROSS
+        tests:
+          - not_null
+          - type: float
+      - name: i
+        tests:
+          - not_null
+      - name: police
+        tests:
+          - not_null
+      

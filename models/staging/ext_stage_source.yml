@@ -1,0 +1,19 @@
+version: 2
+sources:
+- name: ext_stage_source
+  database: TASK1
+  schema: EXTERNAL_STAGES
+  loader: S3
+  tables:
+    - name: home_insurance
+      ext_full_refresh: True
+      description: > data for home insurance
+      external:
+      location: "@TASK1.EXTERNAL_STAGES.AWS_S3_CSV" ##reference an existing external stage 
+      file_format: >
+        (TYPE = CSV FIELD_OPTIONALLY_ENCLOSED_BY = '"' SKIP_HEADER = 1 TRIM_SPACE = TRUE ESCAPE_UNENCLOSED_FIELD = NONE)
+      columns:
+        - name: QUOTE_DATE ## you can input any name
+          data_type: date ## best to use varchar for all
+        - name: COVER_START ## you can input any name
+          data_type: varchar ## best to use varchar for all   
